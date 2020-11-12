@@ -1,0 +1,5 @@
+my_dynamixel_tutorial
+/home/student/Documents/deliv_robot_ws/devel/.private/my_dynamixel_tutorial/cmake.lock /home/student/Documents/deliv_robot_ws/devel/./cmake.lock
+/home/student/Documents/deliv_robot_ws/devel/.private/my_dynamixel_tutorial/share/my_dynamixel_tutorial/cmake/my_dynamixel_tutorialConfig.cmake /home/student/Documents/deliv_robot_ws/devel/share/my_dynamixel_tutorial/cmake/my_dynamixel_tutorialConfig.cmake
+/home/student/Documents/deliv_robot_ws/devel/.private/my_dynamixel_tutorial/share/my_dynamixel_tutorial/cmake/my_dynamixel_tutorialConfig-version.cmake /home/student/Documents/deliv_robot_ws/devel/share/my_dynamixel_tutorial/cmake/my_dynamixel_tutorialConfig-version.cmake
+/home/student/Documents/deliv_robot_ws/devel/.private/my_dynamixel_tutorial/lib/pkgconfig/my_dynamixel_tutorial.pc /home/student/Documents/deliv_robot_ws/devel/lib/pkgconfig/my_dynamixel_tutorial.pc

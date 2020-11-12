@@ -1,0 +1,8 @@
+prefix=/home/student/Documents/deliv_robot_ws/devel/.private/my_dynamixel_tutorial
+
+Name: my_dynamixel_tutorial
+Description: Description of my_dynamixel_tutorial
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
