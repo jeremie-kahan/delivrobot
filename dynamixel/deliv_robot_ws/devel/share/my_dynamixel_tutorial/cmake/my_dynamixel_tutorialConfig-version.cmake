@@ -1,1 +1,0 @@
-/home/student/Documents/deliv_robot_ws/devel/.private/my_dynamixel_tutorial/share/my_dynamixel_tutorial/cmake/my_dynamixel_tutorialConfig-version.cmake
