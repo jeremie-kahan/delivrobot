@@ -1,0 +1,4 @@
+# Warning
+Avant d'executer le code esp32_topics.ino bien suivre les étapes suivante:
+- bien avoir installer la librairie ROS_SERIAL dans Arduino
+- copier le dossier "/deliv_robot" et le coller dans <path>/Arduino/librairies/<librairy rosserial>
