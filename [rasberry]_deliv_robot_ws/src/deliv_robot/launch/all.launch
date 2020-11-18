@@ -1,0 +1,11 @@
+<launch>
+    <!-- include other .launch-->
+    <include file="$(dirname)/controller_manager.launch" />
+    <include file="$(dirname)/start_tilt_controller.launch" />
+    <include file="$(dirname)/set_connection.launch" />
+
+    <!-- node -->
+    <node name ="dynamixel" pkg="deliv_robot" type="dynamixel_command.py"/>
+    <node name ="serial_translator" pkg="deliv_robot" type="serial_translator.py"/>
+    
+</launch>
