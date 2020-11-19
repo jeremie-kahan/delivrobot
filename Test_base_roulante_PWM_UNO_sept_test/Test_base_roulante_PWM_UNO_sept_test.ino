@@ -14,6 +14,8 @@
 
 #include <ros.h>
 #include <deliv_robot/Joystick_cmd.h>
+#include <geometry_msgs/Twist.h>
+
 
 
 // ================================================================================
@@ -27,22 +29,27 @@
 #define MOT_C1_PIN 3
 #define MOT_C2_PIN 9
 
-float MOT_A_SPEED = 0;
-float MOT_B_SPEED = 0;
-float MOT_C_SPEED = 0;
+int MOT_A_SPEED = 0;
+int MOT_B_SPEED = 0;
+int MOT_C_SPEED = 0;
 
 // ================================================================================
 /// Configure the hardware once after booting up.  This runs once after pressing
 //// reset or powering up the board.
-void update_variables(const deliv_robot::Joystick_cmd& data){
-  MOT_A_SPEED = data.x;
-  MOT_B_SPEED = data.x;
-  MOT_C_SPEED = data.y;
+
+void update_variables(const geometry_msgs::Twist& data){
+  MOT_A_SPEED = data.linear.x;
+  MOT_B_SPEED = data.linear.x;
+  MOT_C_SPEED = data.linear.y;
   }
 ros::NodeHandle  nh;
-ros::Subscriber<deliv_robot::Joystick_cmd> sub("/master/joystick", &update_variables);
+ros::Subscriber<geometry_msgs::Twist> sub("/master/joystick", update_variables);
+//ros::Subscriber<deliv_robot::Joystick_cmd> sub("/master/joystick", update_variables);
+
 void setup(void)
 { 
+  Serial.begin(57600);
+  nh.initNode();
   nh.subscribe(sub);
   // Initialize the stepper driver control pins to output drive mode.
   pinMode(MOT_A1_PIN, OUTPUT);
@@ -61,7 +68,7 @@ void setup(void)
   digitalWrite(MOT_C2_PIN, LOW);
   
   // Initialize the serial UART at 9600 bits per second.
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 // ================================================================================

@@ -4,7 +4,7 @@
 #include <BLE2902.h>
 #include "ros.h"
 #include "std_msgs/Bool.h"
-#include //a include Joystick_cmd
+#include "deliv_robot/Joystick_cmd.h"
 
 
 BLEServer *pServer = NULL;
@@ -16,14 +16,14 @@ bool oldDeviceConnected = false;
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 const int statePin = 36;
-const int wallPin = 2;
+const int wallPin = 32;
 int stateValue = 0;
 int wallValue = 0;
 ros::NodeHandle nh;
 
 std_msgs::Bool wall_msg;
 std_msgs::Bool state_msg;
-std_msgs::Joystick_cmd joystick_msg;
+deliv_robot::Joystick_cmd joystick_msg;
 
 ros::Publisher wall("/esp32/wall_detector", &wall_msg);
 ros::Publisher state("/esp32/state_sensor", &state_msg);
@@ -57,15 +57,8 @@ class MyCallbacks : public BLECharacteristicCallbacks
         int y = 0;
         memcpy(&x, value.substr(4, 4).data(), 4);
         memcpy(&y, value.substr(8, 4).data(), 4);
-        Serial.println("*********");
-        Serial.print("[x;y] = [");
-        Serial.print(x);
-        Serial.print(";");
-        Serial.print(y);
-        Serial.println("]");
-        std_msgs::Joystick_cmd cmd;
-        cmd.x = x;
-        cmd.y = y;
+        joystick_msg.x = x;
+        joystick_msg.y = y;
         joystick.publish(&joystick_msg);
       }
       else
@@ -92,7 +85,6 @@ class MyCallbacks : public BLECharacteristicCallbacks
 
 void setup()
 {
-  Serial.begin(115200);
   
   nh.initNode();
   nh.advertise(wall);
@@ -134,25 +126,26 @@ void setup()
   pAdvertising->setScanResponse(false);
   pAdvertising->setMinPreferred(0x0); // set value to 0x00 to not advertise this parameter
   BLEDevice::startAdvertising();
-  Serial.println("Waiting a client connection to notify...");
 }
 
 void loop()
 {
   stateValue = analogRead(statePin);
   wallValue = analogRead(wallPin);
-  if (stateValue<900){
+  if (stateValue<1500){
     state_msg.data = true;
   }
   else{
     state_msg.data = false;
   }
-  if (wallValue<900){
+
+  if (wallValue<1500){
     wall_msg.data = true;
   }
   else{
     wall_msg.data = false;
   }
+  
   wall.publish(&wall_msg);
   state.publish(&state_msg);
   nh.spinOnce();
@@ -174,14 +167,13 @@ void loop()
   {
     delay(500);                  // give the bluetooth stack the chance to get things ready
     pServer->startAdvertising(); // restart advertising
-    Serial.println("start advertising");
     oldDeviceConnected = deviceConnected;
   }
   // connecting
   if (deviceConnected && !oldDeviceConnected)
   {
     // do stuff here on connecting
-    Serial.println("Device connected");
     oldDeviceConnected = deviceConnected;
   }
+  delay(100);
 }
