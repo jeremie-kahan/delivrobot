@@ -4,7 +4,7 @@
 #include <BLE2902.h>
 #include "ros.h"
 #include "std_msgs/Bool.h"
-#include //a include
+#include //a include Joystick_cmd
 
 
 BLEServer *pServer = NULL;
@@ -15,13 +15,15 @@ bool oldDeviceConnected = false;
 #define SERVICE_UUID "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
-const int potPin = 36;
-int potValue = 0;
+const int statePin = 36;
+const int wallPin = 2;
+int stateValue = 0;
+int wallValue = 0;
 ros::NodeHandle nh;
 
 std_msgs::Bool wall_msg;
 std_msgs::Bool state_msg;
-std_msgs:: joystick_msg; //TODO
+std_msgs::Joystick_cmd joystick_msg;
 
 ros::Publisher wall("/esp32/wall_detector", &wall_msg);
 ros::Publisher state("/esp32/state_sensor", &state_msg);
@@ -61,7 +63,9 @@ class MyCallbacks : public BLECharacteristicCallbacks
         Serial.print(";");
         Serial.print(y);
         Serial.println("]");
-        //TODO set joy var
+        std_msgs::Joystick_cmd cmd;
+        cmd.x = x;
+        cmd.y = y;
         joystick.publish(&joystick_msg);
       }
       else
@@ -135,14 +139,19 @@ void setup()
 
 void loop()
 {
-  potValue = analogRead(potPin);
-  if (potValue<900){
-    wall_msg.data = true;
+  stateValue = analogRead(statePin);
+  wallValue = analogRead(wallPin);
+  if (stateValue<900){
     state_msg.data = true;
   }
   else{
-    wall_msg.data = false;
     state_msg.data = false;
+  }
+  if (wallValue<900){
+    wall_msg.data = true;
+  }
+  else{
+    wall_msg.data = false;
   }
   wall.publish(&wall_msg);
   state.publish(&state_msg);
