@@ -9,9 +9,9 @@
 ## But du projet:
 Projet de prototypage libre sur 20h
 
-Problématique:
+Problématique: 
 
-Solution: un robot téléguidable qui ouvre la boite que s'il détécte la présence d'une personne
+Solution: un robot téléguidable portant une boite qui ne s'ouvre que s'il détecte la présence d'une personne
 
 ## Description git
 
@@ -23,6 +23,12 @@ Solution: un robot téléguidable qui ouvre la boite que s'il détécte la prés
 
         /[raspberry]_deliv_robot_ws => worspace ROS executable sur la raspberry
 
+## Comment exécuter le code principal (PC ou raspberry)
+- Installer tout le dossier [PC]_deliv_robot_ws
+- installer rosserial(https://github.com/ros-drivers/rosserial.git) et dynamixel_motor(https://github.com/arebgun/dynamixel_motor.git ) dans [PC]_deliv_robot_ws/src
+- ```$cd [PC]_deliv_robot_ws```
+- ```$catkin_make```
+- ```$src/deliv_robot/start_project.sh```, ce script va s'occuper de donner les droits de lecture pour les ports séries et d'executer tout les noeuds ROS
 
 ### Moteur dynamixel
 -	Telecharger le git : https://github.com/arebgun/dynamixel_motor.git
@@ -39,6 +45,12 @@ trouver où se trouve le set_servo_config.py (logiquement dans dynamixel_driver)
 ```$./set_servo_config.py –port=/dev/ttyAMC0 –baud=1000000 –ccw-angle=1023 –cw-angle-limit=0 1```
 
 ### ROSSERIAL
-installer ROSSERIAL sur PC
-installer la librairie Arduino IDE rosserial
+installer ROSSERIAL sur PC ou la raspberry pi - https://github.com/ros-drivers/rosserial.git
+supprimer les dossiers "inutiles" afin de ne garder que:
+- rosserial
+- rosserial_arduino
+- rosserial_client
+- rosserial_msgs
+- rosserial_python
+installer la librairie Arduino IDE rosserial à l'aide du gestionnaire de blibliothèque
 
