@@ -8,11 +8,11 @@
             </rosparam>
     </node>
 
-    <test test-name="rosserial_arduino" pkg="rosserial_arduino" type="serial_node.py">
+   <node name="rosserial_arduino" pkg="rosserial_arduino" type="serial_node.py" output="screen">
     <rosparam>
-            port: "/dev/ttyUSB1"
-            baud: "6900"
+            port: "/dev/ttyACM1"
+            baud: "57600"
             </rosparam>
-    </test>
+    </node>
 
 </launch>

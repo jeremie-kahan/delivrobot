@@ -7,7 +7,8 @@ from std_msgs.msg import Float64, Bool
 
 class dynamixel_command:
     POSITION_OPEN = 0
-    POSITION_CLOSE = 4
+    POSITION_CLOSE = 1.8
+    CHANGE = 0
 
     def __init__(self):
         rospy.init_node('Dynamixel_command', anonymous=True)
@@ -30,11 +31,15 @@ class dynamixel_command:
         try:
             if capteur == True:
                 position = self.POSITION_OPEN     
-                rospy.loginfo("Le clapet est: ouvert")           
+		if self.CHANGE == 0 :
+        		rospy.loginfo("Le clapet est: ouvert")        
+			self.CHANGE =1   
 
             elif capteur == False:
                 position = self.POSITION_CLOSE
-                rospy.loginfo("Le clapet est: fermer")
+		if self.CHANGE == 1 :
+                		rospy.loginfo("Le clapet est: ferme")    
+				self.CHANGE =0   
             self.pub_position.publish(position)
             
         except rospy.ServiceException as e:
