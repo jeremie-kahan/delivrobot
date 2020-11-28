@@ -1,19 +1,21 @@
 # Projet Prototype_ groupe 6
 
-*Nom:* Deliv'Robot
+**Nom:** Deliv'Robot
 
-*Auteurs:* BRIAND Estelle _ DUPUIS Florian _ KAHAN Jérémie _ MATHOU Cédric
+**Auteurs:** BRIAND Estelle _ DUPUIS Florian _ KAHAN Jérémie _ MATHOU Cédric
 
-*Ecole:* CPE Lyon
+**Ecole:** CPE Lyon
+
+**Lien video:**
 
 ## But du projet:
 Projet de prototypage libre sur 20h
 
-Problématique: Comment délivrer un colis sans se déplacer et s'assurer qu'il s'ouvre qu'en présence d'une personne ?​ 
+**Problématique:** Comment délivrer un colis sans se déplacer et s'assurer qu'il s'ouvre qu'en présence d'une personne ?​ 
 
-Solution: un robot télécommandé apportant une boite qui ne s'ouvre qu'en présence d'une personne davant son capteur
+**Solution:** un robot télécommandé apportant une boite qui ne s'ouvre qu'en présence d'une personne davant son capteur
 
-![synopsis image](synopsis.png)
+![synoptique image](synoptique.png)
 
 ## Description git
 
@@ -56,14 +58,14 @@ https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-window
 -	Sur la VM autoriser l’USB Xevelabs
 -	Sur un teminal, pour savoir quel port correspond au moteur : ```$ls /dev/```
 
-On verra un ttyAMC0 ```$sudo chmod 666 /dev/ttyAMC0```
+On verra un ttyAMC0 ```$ sudo chmod 666 /dev/ttyAMC0```
 
-Ensuite ```$rosrun dynamixel_driver info_dump.py -p /dev/ttyAMC0 1```
+Ensuite ```$ rosrun dynamixel_driver info_dump.py -p /dev/ttyAMC0 1```
 
 Pour faire tourner le motor pas en continue :  
 
 trouver où se trouve le set_servo_config.py (logiquement dans dynamixel_driver)
-```$./set_servo_config.py –port=/dev/ttyAMC0 –baud=1000000 –ccw-angle=1023 –cw-angle-limit=0 1```
+```$ ./set_servo_config.py –port=/dev/ttyAMC0 –baud=1000000 –ccw-angle=1023 –cw-angle-limit=0 1```
 
 ### ROSSERIAL
 Installer la librairie Arduino IDE rosserial à l'aide du gestionnaire de blibliothèque
@@ -71,8 +73,8 @@ Installer la librairie Arduino IDE rosserial à l'aide du gestionnaire de blibli
 
 ### Comment exécuter le code principal (PC ou raspberry)
 - Installer tout le dossier [PC]_deliv_robot_ws
-- installer rosserial(https://github.com/ros-drivers/rosserial.git) et dynamixel_motor(https://github.com/arebgun/dynamixel_motor.git ) dans [PC]_deliv_robot_ws/src
-- ```$cd [PC]_deliv_robot_ws```
-- ```$catkin_make```
-- ```$src/deliv_robot/start_project.sh```, ce script va s'occuper de donner les droits de lecture pour les ports séries et d'executer tout les noeuds ROS
+- Installer rosserial(https://github.com/ros-drivers/rosserial.git) et dynamixel_motor(https://github.com/arebgun/dynamixel_motor.git ) dans [PC]_deliv_robot_ws/src
+- ```$ cd [PC]_deliv_robot_ws```
+- ```$ catkin_make```
+- ```$ src/deliv_robot/start_project.sh```, ce script va s'occuper de donner les droits de lecture pour les ports séries et d'executer tout les noeuds ROS
 
