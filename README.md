@@ -70,6 +70,8 @@ trouver où se trouve le set_servo_config.py (logiquement dans dynamixel_driver)
 ### ROSSERIAL
 Installer la librairie Arduino IDE rosserial à l'aide du gestionnaire de blibliothèque
 
+### CAO pour impression 3D
+<script src="https://github.com/jeremie-kahan/delivrobot/blob/master/Assemblage1%20Proto%20Groupe%202%20OK.STL"></script>
 
 ### Comment exécuter le code principal (PC ou raspberry)
 - Installer tout le dossier [PC]_deliv_robot_ws
