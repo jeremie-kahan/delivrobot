@@ -6,7 +6,7 @@
 
 **Ecole:** CPE Lyon
 
-**Lien video:** https://www.youtube.com/watch?v=jA0dbAfiRVc 
+**Lien video:** https://youtu.be/Q2rubuounh4 
 
 ## But du projet:
 Projet de prototypage libre sur 20h
